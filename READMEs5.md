@@ -2,6 +2,8 @@
 
 API REST desenvolvida como atividade de validação de dados e tratamento global de erros. O serviço cadastra usuários com nome e e-mail, persiste os dados no PostgreSQL e responde com erros JSON padronizados.
 
+As atividades estão referenciadas nos nomes dos arquivos.
+
 **Repositório:** [github.com/joseeric26/trabalho-de-api](https://github.com/joseeric26/trabalho-de-api)
 
 ## Tecnologias
@@ -118,27 +120,27 @@ As imagens registram requisições feitas localmente durante o desenvolvimento. 
 
 ### Cadastro válido
 
-![Envio de um usuário com nome e e-mail válidos. A captura é de uma execução anterior que retornava 200.](<./Captura de tela 2026-11-25 152150.png>)
+![Envio de um usuário com nome e e-mail válidos. A captura é de uma execução anterior que retornava 200.](<./imagens trabalho semana 5/Captura de tela 2026-11-25 152150.png>)
 
 ### Dados inválidos
 
-![Tentativa de cadastro com nome vazio e e-mail inválido, rejeitada com status 400. A captura é anterior à padronização atual do corpo de erro.](<./Captura de tela 2026-11-25 152125.png>)
+![Tentativa de cadastro com nome vazio e e-mail inválido, rejeitada com status 400. A captura é anterior à padronização atual do corpo de erro.](<./imagens trabalho semana 5/Captura de tela 2026-11-25 152125.png>)
 
 ### JSON malformado
 
-![JSON malformado rejeitado com status 400 e erro INVALID_JSON.](<./Captura de tela 2026-11-25 153413.png>)
+![JSON malformado rejeitado com status 400 e erro INVALID_JSON.](<./imagens trabalho semana 5/Captura de tela 2026-11-25 153413.png>)
 
 ### Corpo vazio
 
-![Requisição sem corpo rejeitada com status 400 e resposta de erro padronizada.](<./Captura de tela 2026-11-25 153811.png>)
+![Requisição sem corpo rejeitada com status 400 e resposta de erro padronizada.](<./imagens trabalho semana 5/Captura de tela 2026-11-25 153811.png>)
 
 ### Erro interno
 
-![Erro interno retornado como status 500 sem expor o stack trace ao cliente.](<./Captura de tela 2026-11-25 154555.png>)
+![Erro interno retornado como status 500 sem expor o stack trace ao cliente.](<./imagens trabalho semana 5/Captura de tela 2026-11-25 154555.png>)
 
 ### E-mail duplicado
 
-![Tentativa de cadastrar e-mail existente respondida com 409 Conflict.](<./Captura de tela 2026-11-25 160204.png>)
+![Tentativa de cadastrar e-mail existente respondida com 409 Conflict.](<./imagens trabalho semana 5/Captura de tela 2026-11-25 160204.png>)
 
 ## Testes
 
