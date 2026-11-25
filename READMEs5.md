@@ -173,3 +173,52 @@ api/
 Expor o *stack trace* diretamente ao usuário final é uma falha de segurança porque pode revelar a estrutura de pastas, nomes de classes, bibliotecas e detalhes da implementação. Essas informações ajudam a identificar as tecnologias usadas e possíveis vulnerabilidades do servidor. Por isso, erros internos devem ser registrados apenas nos logs da equipe, enquanto o cliente recebe uma mensagem genérica e segura.
 
 Um padrão consistente de erros permite que o frontend interprete o código `error` e os campos de `details` para reagir automaticamente — por exemplo, mostrar a mensagem de validação junto ao campo correspondente ou orientar o usuário a escolher outro e-mail. Assim, quem consome a API não precisa adivinhar o formato ou inferir o tipo de falha a partir de mensagens variáveis.
+
+## Como executar
+
+Você precisa de Java 21 ou superior, Maven e PostgreSQL. Execute os
+comandos na pasta que contém o `pom.xml`.
+
+### Preparar o banco
+
+Se o banco `trabalho` ainda não existir, crie-o:
+
+```powershell
+psql -h 127.0.0.1 -p 5432 -U postgres -d postgres -c "CREATE DATABASE trabalho;"
+```
+
+Crie a tabela `usuarios` usando o script que acompanha o projeto:
+
+```powershell
+psql -h 127.0.0.1 -p 5432 -U postgres -d trabalho -f criar_usuarios.sql
+```
+
+### Iniciar a API
+
+No PowerShell, configure a conexão e execute o projeto no mesmo terminal:
+
+```powershell
+$env:SPRING_DATASOURCE_URL = 'jdbc:postgresql://127.0.0.1:5432/trabalho'
+$env:SPRING_DATASOURCE_USERNAME = 'postgres'
+$env:SPRING_DATASOURCE_PASSWORD = [System.Net.NetworkCredential]::new('', (Read-Host 'Senha do PostgreSQL' -AsSecureString)).Password
+mvn spring-boot:run
+```
+
+A senha é solicitada no terminal. Se `psql` ou `mvn` não estiverem no
+`PATH`, use o caminho completo do executável na sua máquina.
+
+### Testar o cadastro
+
+No Postman, envie um `POST` para `http://localhost:8080/usuarios`,
+com **Body → raw → JSON**:
+
+```json
+{
+  "nome": "Ana",
+  "email": "ana@exemplo.com"
+}
+```
+
+O primeiro cadastro desse e-mail retorna `201 Created`. Se enviar o
+mesmo e-mail novamente, a API retorna `409 Conflict` com o código
+`EMAIL_ALREADY_EXISTS`.
